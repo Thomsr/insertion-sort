@@ -11,7 +11,7 @@ export default makeScene2D(function* (view) {
   const ArrayReference = createRef<Array>();
   const outlineReference = createRef<Rect>();
 
-  const ArrayValues = [1, 3, 6, 2, 4];
+  const ArrayValues = [4, 5, 6, 3];
   const BoxWidth = createSignal(1);
 
   view.add(
@@ -54,15 +54,14 @@ function * InsertionSort(Array: Array, Outline: Rect, BoxWidth: SimpleSignal<num
     yield* waitFor(1);
     // yield* updateOutline(Array, Outline);
     let j = i;
-    useLogger().debug(BoxWidth().toString());
-    while(j >= 0){
+    while(j > 0){
       yield* all(
         Array.HighLight(j-1, 1, new Color(Colors.blue)),
         Array.HighLight(j, 1, new Color(Colors.blue)),
       );
       waitFor(1);
       if(Array.values()[j-1] > Array.values()[j]){
-        yield * Array.Swap(j, j-1, true, 1);
+        yield * Array.Swap(j, j-1, false, 1);
       } else{
         yield* all(
           Array.deHighLight(j-1, 1),
