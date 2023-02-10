@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "seed": 3994007095,
+  "timeEvents": [
+    {
+      "name": "O",
+      "targetTime": 4.060084262490344
+    },
+    {
+      "name": "n",
+      "targetTime": 5.973241722500095
+    },
+    {
+      "name": "dissappear",
+      "targetTime": 8.141066750315309
+    },
+    {
+      "name": "list",
+      "targetTime": 9.444723881222645
+    },
+    {
+      "name": "Useful",
+      "targetTime": 14.774459962958256
+    },
+    {
+      "name": "Done",
+      "targetTime": 19.34466166439058
+    }
+  ]
+}

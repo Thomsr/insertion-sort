@@ -1,5 +1,5 @@
 import { makeScene2D } from '@motion-canvas/2d/lib/scenes';
-import { Rect, Node, Line } from '@motion-canvas/2d/lib/components/'
+import { Rect, Node, Line, Text } from '@motion-canvas/2d/lib/components/'
 import { Color, Spacing, Vector2 } from '@motion-canvas/core/lib/types';
 import { createRef } from '@motion-canvas/core/lib/utils';
 import { easeInOutCubic, tween } from '@motion-canvas/core/lib/tweening';
@@ -12,8 +12,30 @@ export default makeScene2D(function* (view) {
     const ArrayReference = createRef<Array>();
     const outlineReference = createRef<Rect>();
 
+    const Example1 = createRef<Text>();
+    const textStyle = {
+        paddingTop: 10,
+        fontFamily: 'JetBrains Mono',
+        fill: 'rgba(255, 255, 255, 0.6)',
+      };
+
     const ArrayValues = [4, 2, 3, 6, 2];
     const BoxWidth = createSignal(1);
+
+    view.add(
+        <Text
+            ref={Example1}
+            text={"EXAMPLE 1"}
+            opacity={0}
+            fontSize={100}
+            lineHeight={100}
+            {...textStyle}
+        />
+    )
+
+    yield* Example1().opacity(1, .5)
+    yield* waitFor(.7);
+    yield Example1().opacity(0, .5)
 
     view.add(
         <>
@@ -70,8 +92,8 @@ export default makeScene2D(function* (view) {
 
     yield* waitUntil('Extend1');
     yield* all(
-        ArrayReference().deHighLight(0, .5),
-        ArrayReference().deHighLight(1, .5),
+        ArrayReference().deHighLight(0, .5, new Color(Colors.blue)),
+        ArrayReference().deHighLight(1, .5, new Color(Colors.blue)),
     )
     yield BoxWidth(2, 1);
 
@@ -84,8 +106,8 @@ export default makeScene2D(function* (view) {
     yield* ArrayReference().Swap(1, 2, true, 1);
     yield* waitFor(.2);
     yield* all(
-        ArrayReference().deHighLight(1, 1),
-        ArrayReference().deHighLight(2, 1),
+        ArrayReference().deHighLight(1, 1, new Color(Colors.blue)),
+        ArrayReference().deHighLight(2, 1, new Color(Colors.blue)),
     )
 
     yield* waitUntil('H3_1');
@@ -95,8 +117,8 @@ export default makeScene2D(function* (view) {
 
     yield* waitUntil('deH');
     yield* all(
-        ArrayReference().deHighLight(1, .7),
-        ArrayReference().deHighLight(0, .7),
+        ArrayReference().deHighLight(1, .7, new Color(Colors.blue)),
+        ArrayReference().deHighLight(0, .7, new Color(Colors.blue)),
     )
 
     yield* waitUntil('Extend2');
@@ -109,8 +131,8 @@ export default makeScene2D(function* (view) {
 
     yield* waitUntil('deH_1');
     yield* all(
-        ArrayReference().deHighLight(3, 1),
-        ArrayReference().deHighLight(2, 1),
+        ArrayReference().deHighLight(3, 1, new Color(Colors.blue)),
+        ArrayReference().deHighLight(2, 1, new Color(Colors.blue)),
     )
 
     yield* waitUntil('Extend3');
@@ -127,8 +149,8 @@ export default makeScene2D(function* (view) {
     yield* ArrayReference().Swap(3, 4, true, 1);
     yield* waitFor(.2);
     yield* all(
-        ArrayReference().deHighLight(4, 1),
-        ArrayReference().deHighLight(3, 1),
+        ArrayReference().deHighLight(4, 1, new Color(Colors.blue)),
+        ArrayReference().deHighLight(3, 1, new Color(Colors.blue)),
     )
 
     yield* waitUntil('H2_2')
@@ -142,8 +164,8 @@ export default makeScene2D(function* (view) {
     yield* ArrayReference().Swap(2, 3, true, 1);
     yield* waitFor(.2);
     yield* all(
-        ArrayReference().deHighLight(2, 1),
-        ArrayReference().deHighLight(3, 1),
+        ArrayReference().deHighLight(2, 1, new Color(Colors.blue)),
+        ArrayReference().deHighLight(3, 1, new Color(Colors.blue)),
     )
 
     yield* waitUntil('H2_3')
@@ -157,8 +179,8 @@ export default makeScene2D(function* (view) {
     yield* ArrayReference().Swap(1, 2, true, 1);
     yield* waitFor(.2);
     yield* all(
-        ArrayReference().deHighLight(1, 1),
-        ArrayReference().deHighLight(2, 1),
+        ArrayReference().deHighLight(1, 1, new Color(Colors.blue)),
+        ArrayReference().deHighLight(2, 1, new Color(Colors.blue)),
     )
 
     yield* waitUntil('H2_4')
@@ -170,8 +192,8 @@ export default makeScene2D(function* (view) {
 
     yield* waitUntil('deH_2');
     yield* all(
-        ArrayReference().deHighLight(0, 1),
-        ArrayReference().deHighLight(1, 1),
+        ArrayReference().deHighLight(0, 1, new Color(Colors.blue)),
+        ArrayReference().deHighLight(1, 1, new Color(Colors.blue)),
     )
 
     yield* waitUntil('Extend4');
@@ -179,7 +201,7 @@ export default makeScene2D(function* (view) {
 
     yield* waitUntil('Everything');
     for(let i = 0; i < ArrayValues.length; i++){
-        yield* ArrayReference().HighLight(i, .5, new Color(Colors.green));
+        yield* ArrayReference().HighLight(i, .3, new Color(Colors.green));
     }
 
     yield* waitUntil('Next');
