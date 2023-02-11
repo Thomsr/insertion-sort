@@ -1,5 +1,5 @@
 import {makeScene2D} from '@motion-canvas/2d/lib/scenes';
-import {Node, Line, Text, Layout} from '@motion-canvas/2d/lib/components/'
+import { Rect, Node, Line, Text, Layout} from '@motion-canvas/2d/lib/components/'
 import {Color, Vector2} from '@motion-canvas/core/lib/types';
 import { createRef, useDuration } from '@motion-canvas/core/lib/utils';
 import { easeInOutCubic, tween } from '@motion-canvas/core/lib/tweening';
@@ -34,7 +34,7 @@ export default makeScene2D(function* (view) {
           opacity={0}
           {...textStyle}
         />
-          <Layout alignItems={'start'} 
+          <Rect alignItems={'start'} 
             justifyContent={'center'}
           >
           <Text 
@@ -45,7 +45,7 @@ export default makeScene2D(function* (view) {
             fontSize={30}
             {...textStyle}
             />
-          </Layout>
+          </Rect>
     </>
   );
 

@@ -35,26 +35,26 @@ export default makeScene2D(function* (view) {
 
     yield* Example1().opacity(1, .5)
     yield* waitFor(.7);
-    yield Example1().opacity(0, .5)
+    yield* Example1().opacity(0, .5)
 
     view.add(
         <>
-        <Array
-            ref={ArrayReference}
-            values={ArrayValues}
-            boxGap={36}
-        />
-        <Rect
-            ref={outlineReference}
-            x={() => -(ArrayValues.length/2) * (128 + 36) + BoxWidth() * ((128 + 36) / 2)}
-            height={168}
-            width={() => BoxWidth() * (128 + 36)}
-            stroke={Colors.green}
-            lineWidth={6}
-            radius={new Spacing(4)}
-            opacity={0}
-        >
-        </Rect>
+            <Array
+                ref={ArrayReference}
+                values={ArrayValues}
+                boxGap={36}
+            />
+            <Rect
+                ref={outlineReference}
+                x={() => -(ArrayValues.length/2) * (128 + 36) + BoxWidth() * ((128 + 36) / 2)}
+                height={168}
+                width={() => BoxWidth() * (128 + 36)}
+                stroke={Colors.green}
+                lineWidth={6}
+                radius={new Spacing(4)}
+                opacity={0}
+            >
+            </Rect>
         </>
     )
 

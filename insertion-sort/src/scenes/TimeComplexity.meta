@@ -20,11 +20,15 @@
     },
     {
       "name": "Useful",
-      "targetTime": 14.774459962958256
+      "targetTime": 14.236400071134996
     },
     {
       "name": "Done",
-      "targetTime": 19.34466166439058
+      "targetTime": 18.811328331057243
+    },
+    {
+      "name": "Next",
+      "targetTime": 28.595925266360133
     }
   ]
 }

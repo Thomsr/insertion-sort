@@ -1,7 +1,7 @@
 import { makeScene2D } from '@motion-canvas/2d/lib/scenes';
 import { Rect, Node, Line, Text } from '@motion-canvas/2d/lib/components/'
 import { Color, Direction, Spacing, Vector2 } from '@motion-canvas/core/lib/types';
-import { createRef, useLogger } from '@motion-canvas/core/lib/utils';
+import { useRandom ,createRef, useLogger, range, makeRef } from '@motion-canvas/core/lib/utils';
 import { easeInOutCubic, tween } from '@motion-canvas/core/lib/tweening';
 import { all, any, waitFor, waitUntil } from '@motion-canvas/core/lib/flow';
 import { Array } from '../components/ArrayComponent/Array'
@@ -108,7 +108,10 @@ export default makeScene2D(function* (view) {
 
     for(let i = 0; i < 7; i++){
         for(let j = 0; j < 12; j++){
-            yield* ArrayRef().boxArray[i * 12 + j].opacity(1, .05);
+            yield* any(
+                ArrayRef().boxArray[i * 12 + j].opacity(1, .07),
+                waitFor(.03),
+            ) 
         }
     }
     yield* waitUntil('Useful');
@@ -128,6 +131,47 @@ export default makeScene2D(function* (view) {
         ArrayRef().HighLight(2, 1, new Color(Colors.green)),
     )
     yield* waitUntil('Done');
-    yield* ArrayRef().opacity(0, 1),
-    yield* waitFor(30);
+    yield* ArrayRef().opacity(0, 1);
+
+    const Random = useRandom()
+    const Lines: Rect[] = [];
+    const Block = createRef<Rect>(); 
+
+    view.add(
+        <Rect
+            ref={Block}
+            paddingTop={28}
+            layout
+            gap={10}
+            direction={'column'}
+            alignItems={'start'}
+            fill={Colors.surface}
+            width={500}
+            height={600}
+            radius={new Spacing(5)}
+            opacity={0}
+        >
+        {range(22).map(i => (
+            <Rect
+                ref={makeRef(Lines, i)}
+                fill={'#ffffff99'}
+                marginLeft={Random.nextInt(0, 3) * 20 + 28}
+                width={Random.nextInt(100,400)}
+                height={15}
+                radius={5}
+            />
+        ))}
+        </Rect>
+    )
+
+    yield* Block().opacity(1, 1);
+    for(let i = 0; i < 22; i++){
+        switch(Random.nextInt(0, 3)){
+            case 0: yield* Lines[i].fill(Colors.green, .2); break;    
+            case 1: yield* Lines[i].fill(Colors.green, .2); break;    
+            case 2: yield* Lines[i].fill(Colors.blue, .2); break;
+        }
+    }
+
+    yield* waitUntil("Next");
 })
