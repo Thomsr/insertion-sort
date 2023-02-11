@@ -2,7 +2,7 @@ import { makeScene2D } from '@motion-canvas/2d/lib/scenes';
 import { Rect, Node, Line, Text } from '@motion-canvas/2d/lib/components/'
 import { Color, Direction, Spacing, Vector2 } from '@motion-canvas/core/lib/types';
 import { useRandom ,createRef, useLogger, range, makeRef } from '@motion-canvas/core/lib/utils';
-import { easeInOutCubic, tween } from '@motion-canvas/core/lib/tweening';
+import { createEaseInBack, easeInOutCubic, tween } from '@motion-canvas/core/lib/tweening';
 import { all, any, waitFor, waitUntil } from '@motion-canvas/core/lib/flow';
 import { Array } from '../components/ArrayComponent/Array'
 import { Colors } from '../styles/styles';
@@ -131,6 +131,65 @@ export default makeScene2D(function* (view) {
         ArrayRef().HighLight(2, 1, new Color(Colors.green)),
     )
     yield* waitUntil('Done');
+    yield* ArrayRef().opacity(0, 1);
+
+    view.add(
+        <Array
+            ref={ArrayRef}
+            values={[1,2,3,4,5,6]}
+            opacity={0}
+        />
+    )
+    yield* ArrayRef().opacity(1, .5);
+    for(let i = 0; i < 6; i++){
+        yield* ArrayRef().HighLight(i, 1, new Color(Colors.green));
+    }
+
+    yield* waitUntil('n')
+
+    yield* all(
+        ArrayRef().position.y(-100, 1),
+        ArrayRef().deHighLight(0, 1, new Color(Colors.green)),
+        ArrayRef().deHighLight(1, 1, new Color(Colors.green)),
+        ArrayRef().deHighLight(2, 1, new Color(Colors.green)),
+        ArrayRef().deHighLight(3, 1, new Color(Colors.green)),
+        ArrayRef().deHighLight(4, 1, new Color(Colors.green)),
+        ArrayRef().deHighLight(5, 1, new Color(Colors.green)),
+    )
+
+    const O = createRef<Text>();
+    view.add(
+        <Text 
+            ref={O}
+            text={"O(N)"}
+            y={200}
+            opacity={0}
+            fontSize={80}
+            {...textStyle}
+        />
+    )
+
+    yield* O().opacity(1, 1);
+
+    // yield* waitUntil('However');
+    yield* all(
+        O().opacity(0, 1),
+        ArrayRef().position.y(0, 1),
+    )
+
+
+
+
+    yield* waitUntil('Reverse')
+    for(let i = 0; i < 3; i++){
+        yield* ArrayRef().Swap(i, 6-i-1, true, 1);
+    }
+
+    for(let i = 0; i < 6; i++){
+        yield* ArrayRef().HighLight(i, 1, new Color(Colors.red));
+    }
+
+    yield* waitUntil('Psuedo');
     yield* ArrayRef().opacity(0, 1);
 
     const Random = useRandom()

@@ -8,27 +8,35 @@
     },
     {
       "name": "n",
-      "targetTime": 5.973241722500095
+      "targetTime": 1914.5
     },
     {
       "name": "dissappear",
-      "targetTime": 8.141066750315309
+      "targetTime": 953.4333333333333
     },
     {
       "name": "list",
-      "targetTime": 9.444723881222645
+      "targetTime": 953.9333333333333
     },
     {
       "name": "Useful",
-      "targetTime": 14.236400071134996
+      "targetTime": 956.4333333333333
     },
     {
       "name": "Done",
-      "targetTime": 18.811328331057243
+      "targetTime": 958.8666666666667
+    },
+    {
+      "name": "Reverse",
+      "targetTime": 1917.5
+    },
+    {
+      "name": "Psuedo",
+      "targetTime": 1926.5
     },
     {
       "name": "Next",
-      "targetTime": 28.595925266360133
+      "targetTime": 1932.9
     }
   ]
 }
