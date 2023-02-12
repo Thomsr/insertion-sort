@@ -145,7 +145,7 @@ export default makeScene2D(function* (view) {
         yield* ArrayRef().HighLight(i, 1, new Color(Colors.green));
     }
 
-    yield* waitUntil('n')
+    yield* waitUntil('n1')
 
     yield* all(
         ArrayRef().position.y(-100, 1),
@@ -171,14 +171,11 @@ export default makeScene2D(function* (view) {
 
     yield* O().opacity(1, 1);
 
-    // yield* waitUntil('However');
+    yield* waitUntil('However');
     yield* all(
         O().opacity(0, 1),
         ArrayRef().position.y(0, 1),
     )
-
-
-
 
     yield* waitUntil('Reverse')
     for(let i = 0; i < 3; i++){
@@ -189,8 +186,35 @@ export default makeScene2D(function* (view) {
         yield* ArrayRef().HighLight(i, 1, new Color(Colors.red));
     }
 
+    yield* waitUntil('n3');
+    yield* all(
+        ArrayRef().position.y(-100, 1),
+        ArrayRef().deHighLight(0, 1, new Color(Colors.red)),
+        ArrayRef().deHighLight(1, 1, new Color(Colors.red)),
+        ArrayRef().deHighLight(2, 1, new Color(Colors.red)),
+        ArrayRef().deHighLight(3, 1, new Color(Colors.red)),
+        ArrayRef().deHighLight(4, 1, new Color(Colors.red)),
+        ArrayRef().deHighLight(5, 1, new Color(Colors.red)),
+    )
+
+    view.add(
+        <Text 
+            ref={O}
+            text={"O(N^2)"}
+            y={200}
+            opacity={0}
+            fontSize={80}
+            {...textStyle}
+        />
+    )
+
+    yield* O().opacity(1, 1);
+
     yield* waitUntil('Psuedo');
-    yield* ArrayRef().opacity(0, 1);
+    yield* all(
+        ArrayRef().opacity(0, 1),
+        O().opacity(0, 1)
+    ) 
 
     const Random = useRandom()
     const Lines: Rect[] = [];

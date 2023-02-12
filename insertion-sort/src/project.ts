@@ -18,4 +18,3 @@ export default makeProject({
   background: '#141414',
   audio: Voice,
 });
-  
